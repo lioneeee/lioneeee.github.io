@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #bigbox {
+            width: 600px;
+            background-color: lightgreen;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        #bigbox .imgs {
+            position: relative;
+        }
+
+        #bigbox .imgs img {
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+            transition: all .5s;
+        }
+
+        #bigbox .imgs img:nth-child(1) {
+            position: relative;
+        }
+
+        #bigbox .list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+            left: 0;
+            margin-bottom: 5px;
+        }
+
+        #bigbox .list li {
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            margin: 0 10px;
+            border-radius: 50%;
+        }
+
+        #bigbox .left {
+            font-size: 36px;
+            font-weight: bold;
+            color: white;
+            position: absolute;
+
+            top: calc(50% - 24px);
+            left: 0;
+        }
+
+        #bigbox .right {
+            font-size: 36px;
+            font-weight: bold;
+            color: white;
+            position: absolute;
+
+            top: calc(50% - 24px);
+            right: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="bigbox">
+        <div class="imgs">
+            <img src="./imgs/1.jpg" alt="">
+            <img src="./imgs/2.jpg" alt="">
+            <img src="./imgs/3.jpg" alt="">
+            <img src="./imgs/4.jpg" alt="">
+        </div>
+        <ul class="list">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="left">&lt;</div>
+        <div class="right">&gt;</div>
+    </div>
+
+    <script>
+        var imgs = document.getElementById("bigbox").getElementsByClassName('imgs')[0].getElementsByTagName('img');
+
+        var list = document.getElementById("bigbox").getElementsByClassName('list')[0].getElementsByTagName('li');
+
+        var left = document.getElementById("bigbox").getElementsByClassName('left')[0];
+
+        var right = document.getElementById("bigbox").getElementsByClassName('right')[0];
+
+        var current;
+
+
+        function showItem(n) {
+            for (var i = 0; i < imgs.length; i++) {
+                if (i === n) {
+                    imgs[i].style.opacity = '1';
+                    list[i].style.backgroundColor = 'lightgreen';
+                } else {
+                    imgs[i].style.opacity = '0';
+                    list[i].style.backgroundColor = 'white';
+                }
+            }
+            return n;
+        }
+
+
+        current = showItem(0);
+
+
+        for (var i = 0; i < list.length; i++) {
+            list[i].title = i;
+            list[i].onclick = function () {
+                var m = Number(this.title);
+                current = showItem(m);
+            }
+        }
+
+
+
+        function showNext() {
+            current++;
+            if (current >= imgs.length) {
+                current = 0;
+            }
+            showItem(current);
+        }
+
+        right.onclick = showNext;
+
+
+
+        // function showPrev() {
+        //     current--;
+        //     if (current < 0) {
+        //         current = imgs.length - 1;
+        //     }
+        //     showItem(current);
+        // }
+
+        // left.onclick = showPrev;
+
+
+        left.onclick = function () {
+            --current < 0 ? current = imgs.length - 1 : current;
+            showItem(current)
+        }
+
+
+        //   setInterval(function () {  
+        //       showNext();
+        //   }, 3000);
+
+         
+
+        
+    </script>
+</body>
+
+</html>
