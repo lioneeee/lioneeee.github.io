@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>b站</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        .stage {
+            width: 480px;
+            height: 270px;
+            background-image: url(./imgs/eee63cd.webp);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stage .cover-background {
+            width: 100%;
+            height: 12px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 7;
+            opacity: 0;
+            background-color: black;
+            display: flex;
+            align-items: center;
+        }
+
+        .stage span {
+            height: 5px;
+            background-color: white;
+            border-radius: 5px;
+
+
+
+
+
+        }
+
+        .stage .cover {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-image: url(./imgs/486053112_79a2bb-0001.jpg);
+            background-repeat: no-repeat;
+            background-position: 0 0;
+            background-size: 4800px;
+            opacity: 0;
+        }
+
+        p {
+            color: white;
+            width: 500px;
+            position: absolute;
+            top: 10px;
+            left: 480px;
+            margin: 0;
+            padding: 0;
+            /* opacity: 0; */
+            /* display: none; */
+            font-size: 12px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="stage">
+        <div class="cover-background">
+            <span width="0%"></span>
+
+        </div>
+        <div class="cover"></div>
+    </div>
+
+    <script>
+        var index = [
+            0, 8, 14, 20, 25, 31, 39, 50, 61, 67, 73, 80, 87, 93, 104, 116, 126, 132, 138, 144, 152, 159, 170, 177,
+            186,
+            196, 207, 215, 224, 231, 238, 244, 249, 255, 260, 265, 271, 278, 283, 290, 297, 303, 311, 319, 330, 335,
+            350,
+            360, 365, 372, 383, 390, 401, 406, 411, 421, 428, 434, 444, 450, 457, 467, 472, 481, 487, 497, 502, 514,
+            520,
+            534, 542, 547, 555, 562, 568, 575, 581, 587, 592, 598, 605, 610, 615, 621, 633, 642, 650, 658, 668, 677,
+            690,
+            696, 702, 709, 715, 720, 733, 740, 746, 751, 759, 767, 776, 782, 790, 798, 804, 814, 826, 833, 840, 850,
+            856,
+            863, 872, 878, 886, 896, 903, 911, 918, 929, 937, 948, 953, 959, 965, 973, 979, 985, 994, 1001, 1015,
+            1022,
+            1028, 1034, 1040, 1047, 1059, 1064, 1071, 1077, 1084, 1090, 1099, 1105, 1111, 1121, 1130, 1139, 1150,
+            1156,
+            1162, 1171, 1178, 1184, 1191, 1197, 1203, 1210, 1216, 1221, 1228, 1233, 1242, 1250, 1260, 1272, 1282,
+            1292,
+            1297,
+        ];
+
+        var dm = [
+            "章鱼哥还是没有胜过强风暴雨(doge)",
+            "日本裁判",
+            "日本裁判",
+            "海绵宝宝笑死我了",
+            "黑人小哥",
+            "堡垒之夜",
+            "最喜欢的一集",
+            "最喜欢的一集",
+            "喜欢",
+            "我怎么觉得派大星这个配音我在神奇宝贝里听过",
+            "我看见你了",
+            "但凡章鱼哥早点回去都不至于这样",
+            "这……这我还真有可能“模仿”",
+            "为什么非要执着于台配或者央配呢",
+            "派总依旧稳定输出",
+            "包租公～",
+            "为什么台配的海绵宝宝跟低能儿似的",
+            "井字游戏，其实可以先手必胜的",
+            "我小时候就看的台配",
+            "终于找到了",
+        ];
+
+
+        function Dm(i,speed) {
+            this.i = i
+            this.node = document.createElement('p')
+            this.node.innerText = dm[i]
+            document.querySelector('.stage').appendChild(this.node)
+            this.left = 480
+            this.speed =speed;
+
+        }
+        Dm.prototype.move = function () {
+            this.left -= this.speed
+            this.node.style.left = this.left-- + "px";
+        }
+
+        var i = 0
+        var m = new Dm(i,0.25)
+        var dots = []
+        dots.push(m)
+
+        var id;
+        var g = 19
+
+        var o = new Dm(g, 0.5)
+        var oo = []
+        $('.stage').mouseover(function () {
+            $('.cover-background').css('opacity', 1)
+            $('.stage .cover').css('opacity', 1)
+            $('p').css('opacity', 1)
+            id = setInterval(function () {
+                if (m.left < 300) {
+                    i++
+                    g--
+                    if (i > 19) {
+                        i = 0
+                    }
+                    if (g < 0) {
+                        g = 19
+                    }
+                    m = new Dm(i, 0.25)
+                    o = new Dm(g, 0.5)
+
+                    dots.push(m)
+                    oo.push(o)
+                    var t = Math.floor(Math.random() * 8 + 10)
+                    m.node.style.top = t + 'px'
+                    var v = Math.floor(Math.random() * 20 + 25)
+                    o.node.style.top = v + 'px'
+
+                }
+                dots.forEach(function (ele) {
+
+                    ele.move()
+                })
+
+                oo.forEach(function (e) {
+                    e.move()
+                })
+            }, 20)
+        })
+        $('.stage').mouseout(function () {
+            $('.cover-background').css('opacity', 0)
+            $('.stage .cover').css('opacity', 0)
+            $('p').css('opacity', 0)
+            clearInterval(id)
+
+        })
+        $('.stage').mousemove(function () {
+
+            $('span').css('width', event.offsetX * 0.21 + '%')
+            $('span').attr('width', event.offsetX * 0.21)
+
+            var n = $('span').attr('width')
+
+
+
+            // if (index.includes(Math.round(n * 13.03))) {
+
+                $('.stage .cover')[0].style.backgroundPositionX = -n[1] * 480 + "px"
+                $('.stage .cover')[0].style.backgroundPositionY = -n[0] * 270 + "px"
+
+
+            // }
+
+        })
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./my-minireset.css">
+    <style>
+        .box{
+            width: 350px;
+            height: 350px;
+            /* background-color: lightgreen; */
+            display: flex;
+            flex-wrap: wrap;
+            margin: auto;
+        }
+        .box li {
+            border-radius: 50%;
+        }
+        h1{
+            display: flex;
+            justify-content: center;
+            margin: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1></h1>
+    <ul class="box"></ul>
+
+
+    <script>
+        var level = 1;
+
+        var box = document.querySelector('.box');
+        var h1 = document.querySelector('h1')
+
+        function show(level) {
+            box.innerHTML= '';
+            h1.innerText = '关卡:' + level;
+            var color = '#' + Math.random().toString(16).slice(-6);
+
+            for (let i = 0; i < Math.pow(level + 2,2); i++) {
+                
+                var node = document.createElement('li');
+                 
+                node.style.width = 350 / (level + 2) + 'px';
+                node.style.backgroundColor = color;
+                box.appendChild(node);
+                
+            }
+
+            var index = Math.floor(Math.random()*box.querySelectorAll('li').length);
+            box.querySelectorAll('li')[index].style.opacity = "0.7";
+            box.querySelectorAll('li')[index].onclick = function () {
+                level++;
+                show(level)
+            }
+        }
+        show(level);
+        
+    </script>
+</body>
+</html>

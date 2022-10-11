@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手风琴</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="./my-minireset.css">
+    <style>
+        .stage {
+            width: 700px;
+            height: 100px;
+            background-color: #224872;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+        .stage ul {
+            display: flex;
+            
+            height: 69px;
+            
+
+        }
+        .stage ul li{
+            position: relative;
+            width: 69px;
+            margin-right: 10px;
+            
+        }
+       
+
+         .stage ul li.active .large{
+            opacity: 1;
+            /* transform: translateX(0) */
+        }
+
+        .stage ul li.active .small{
+            opacity: 0;
+
+        }
+        .stage ul li .small{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 69px;
+            border-radius: 5px;
+            
+            
+        }
+        .stage ul li .large{
+            width: 224px;
+            height: 69px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            /* transform: translateX(20px);
+            transition: all 0.3s; */
+
+        }
+
+       
+    </style>
+</head>
+
+<body>
+    <div class="stage">
+        <ul>
+            <li>
+                <img class="small" src="./imgs/126.webp" alt="">
+                <img class="large" src="./imgs/126-freehover.png" alt="">
+            </li>
+            <li>
+                <img class="small" src="./imgs/127.webp" alt="">
+                <img class="large" src="./imgs/127-freehover.png" alt="">
+            </li>
+            <li>
+                <img class="small" src="./imgs/131.jpg" alt="">
+                <img class="large" src="./imgs/131-freehover.png" alt="">
+            </li>
+            <li>
+                <img class="small" src="./imgs/173.webp" alt="">
+                <img class="large" src="./imgs/173-freehover.png" alt="">
+            </li>
+            <li>
+                <img class="small" src="./imgs/507.jpg" alt="">
+                <img class="large" src="./imgs/507-freehover.png" alt="">
+            </li>
+            <li>
+                <img class="small" src="./imgs/525.webp" alt="">
+                <img class="large" src="./imgs/525-freehover.png" alt="">
+            </li>
+            <li>
+                <img class="small" src="./imgs/531.jpg" alt="">
+                <img class="large" src="./imgs/531-freehover.png" alt="">
+            </li>
+        </ul>
+    </div>
+
+    <script>
+
+
+        $('li').eq(0).addClass('active').css('width','224px')
+
+            $('li').mouseover(function () {
+          $(this).addClass('active').siblings().removeClass('active')
+          $(this).css('width','224px')
+          $(this).siblings().css('width','69px')
+
+        })
+
+
+    </script>
+
+</body>
+
+</html>
